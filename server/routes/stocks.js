@@ -27,6 +27,7 @@ router.get('/', function(req, res) {
     qs: {comparisons: 'MSFT,^VIX', events: 'div,split', stock: 'F'},
     headers: {
       
+      
       useQueryString: true
     }
   };
