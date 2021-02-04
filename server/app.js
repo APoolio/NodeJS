@@ -1,5 +1,6 @@
 const { profile } = require('console');
 const routes = require('./routes');
+//var bodyParser = require('./body-parser');
 
 //using express.js
 var express = require('express');
@@ -16,4 +17,8 @@ app.listen(3000, function(){
 
 //connecting all routes
 app.use('/', routes);
+
+app.use(express.static(__dirname + '/views'));
+
+
 
