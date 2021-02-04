@@ -1,3 +1,5 @@
+//Routing file for the stocks API methods
+
 const bodyParser = require('body-parser');
 const request = require('request');
 var express = require('express');
@@ -10,13 +12,19 @@ module.exports = function(app){
   });
 };*/
 
+
+router.get('/F', function(req, res){
+  console.log('test');
+});
+
 router.get('/', function(req, res) {
   res.send('GET handler for /stocks route.');
 
+  tick = req.query.stock;
   const options = {
     method: 'GET',
-    url: 'https://yahoo-finance-low-latency.p.rapidapi.com/v8/finance/chart/AAPL',
-    qs: {comparisons: 'MSFT,^VIX', events: 'div,split'},
+    url: 'https://yahoo-finance-low-latency.p.rapidapi.com/v8/finance/chart/' + req.query.stock,
+    qs: {comparisons: 'MSFT,^VIX', events: 'div,split', stock: 'F'},
     headers: {
       'x-rapidapi-key': '9255378ff9msh5b72516af51d05dp160034jsn21cf53f6433c',
       'x-rapidapi-host': 'yahoo-finance-low-latency.p.rapidapi.com',
@@ -24,6 +32,7 @@ router.get('/', function(req, res) {
     }
   };
   
+  //request with callback function inbedded
   request(options, function (error, response, body) {
         if (error) throw new Error(error);
         response.setEncoding('utf-8');
@@ -32,9 +41,12 @@ router.get('/', function(req, res) {
         console.log(data.chart.result[0].meta.symbol);
         console.log(data.chart.result[0].meta.regularMarketPrice);
   });
+
+  
 });
 
 router.post('/', function(req, res) {
+  console.log(req.body);
   res.send('POST handler for /stocks route.');
 });
 
