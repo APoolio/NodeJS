@@ -1,6 +1,7 @@
 const { profile } = require('console');
+const bodyParser = require('body-parser');
 const routes = require('./routes');
-//var bodyParser = require('./body-parser');
+
 
 //using express.js
 var express = require('express');
@@ -14,6 +15,8 @@ app.set('view engine', 'ejs');
 app.listen(3000, function(){
     console.log('App listeing on port 3000');
 });
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //connecting all routes
 app.use('/', routes);
