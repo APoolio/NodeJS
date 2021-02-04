@@ -1,9 +1,9 @@
 const routes = require('express').Router();
 const models = require('./models');
-const stocks = require('./stocks');
+var stocks = require('./stocks');
 
 routes.get('/', function(req, res){
-  res.status(200).json({ message: 'Connected!' });
+  res.render('main');
 });
 
 routes.use('/models', models);
