@@ -6,11 +6,14 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res) {
+
+  console.log(req.url);
+
   //res.send('GET handler for /stocks route.');
   
   const options = {
     method: 'GET',
-    url: 'https://yahoo-finance-low-latency.p.rapidapi.com/v8/finance/chart/' + req.query.stock,
+    url: 'https://yahoo-finance-low-latency.p.rapidapi.com/v8/finance/chart/' + req.query.tick,
     qs: {comparisons: 'MSFT,^VIX', events: 'div,split', stock: 'F'},
     headers: {
       'x-rapidapi-key': '9255378ff9msh5b72516af51d05dp160034jsn21cf53f6433c',
@@ -37,6 +40,8 @@ router.post('/', function(req, res) {
   console.log(req.query);
   res.send('POST handler for /stocks route.');
 });
+
+
 
 /*
 module.exports = function(req, res){
