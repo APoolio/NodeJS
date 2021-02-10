@@ -1,15 +1,17 @@
-const Pool = require('pg').Pool;
-const pool = new Pool({
+var Pool = require('pg').Pool;
+var pool = new Pool({
   user: 'andrew',
   host: 'localhost',
-  database: 'api',
+  database: 'StocksDB',
   password: 'db_pass',
   port: 5432,
 });
 
-const getStocks = function(request, response){
+var getStocks = function(request, response){
   
-  pool.query('SELECT * FROM TickList WHERE id = $1', [id], function(error, results){
+  var id = parseInt(request.params.id);
+
+  pool.query('SELECT * FROM tick_list WHERE id = $1', [id], function(error, results){
     if (error) {
       throw error;
     }
@@ -18,5 +20,5 @@ const getStocks = function(request, response){
 };
 
 module.exports = {
-  getStocks
-}
+    getStocks
+};
