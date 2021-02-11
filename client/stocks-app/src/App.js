@@ -28,18 +28,9 @@ class App extends React.Component{
     return (
       <div className="App">
         <header className="App-header">
-          {/* <img src={logo} className="App-logo" alt="logo" /> */}
-          <p>
-            Watch Debt Accumulate in Realtime.
-          </p>
-          {/* <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {test}
-          </a> */}
+          <p>Watch Debt Accumulate in Realtime.</p>
+          <p>February 10, 2021</p>
+          </header>
 
           <div className="App-main-body">
             <div>
@@ -54,10 +45,19 @@ class App extends React.Component{
               </ul>
             </div>
           </div>
-        </header>
       </div>
     );
   }
 }
 
 export default App;
+
+
+          {/* <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {test}
+          </a> */}

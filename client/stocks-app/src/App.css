@@ -1,5 +1,5 @@
 .App {
-  text-align:center;
+  text-align:left;
 }
 
 .App-logo {
@@ -15,12 +15,17 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  background-position-y: 70%;
+  background-position-x: center;
+  background-size: cover;
+  background-image: url(./7c67a2074bdd4c4d9e568418b1c77b291cfe9d34.jpg);
+  min-height: 40vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(25px + 2vmin);
+  font-family: Roboto;
   color: white;
 }
 
@@ -29,8 +34,7 @@
 }
 
 .App-main-body{
-  border-radius: 25px;
-  background-color: rgb(24, 24, 24);
+  background-color: #282b2c;
   padding: 100px;
   
 }
@@ -40,9 +44,21 @@ input[type="text"]{
   padding: 20px;
   background:#181c22;
   border: 0;
-  float: left;
+  float: center;
   font-size: 20px;
   color: #989898;
+}
+
+button{
+  padding: 20px;
+  width: 20%;
+  float: right;
+  background: #23282e;
+  border: 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
 }
 
 #stock-items{
@@ -54,21 +70,6 @@ input[type="text"]{
   box-sizing: border-box;
 }
 
-button{
-  padding: 20px;
-  width: 30%;
-  float: right;
-  background: #23282e;
-  border: 0;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  font-size: 20px;
-}
-
-
-.App
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -77,3 +78,5 @@ button{
     transform: rotate(360deg);
   }
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
