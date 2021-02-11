@@ -1,8 +1,8 @@
 //Head honcho routes file
 
 const routes = require('express').Router();
-var stocks = require('./stocks');
-var db = require('../DBconfig');
+var stocks = require('./stocks/stocks');
+var db = require('../configs/DBconfig');
 
 //http://127.0.0.1:3000/
 routes.get('/', function(req, res){
@@ -10,8 +10,8 @@ routes.get('/', function(req, res){
   res.render('main');
 });
 
-//http://127.0.0.1:3000/{id}
-routes.get('/:id', db.getStocks);
+//http://127.0.0.1:3000/user/stocks/{id}
+routes.get('/user/stocks/:id', db.getStocks);
 
 //http://127.0.0.1:3000/stock
 routes.use('/stock', stocks);
