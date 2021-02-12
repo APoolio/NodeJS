@@ -4,6 +4,9 @@
   "description": "Tutorial application to learn the major fundamentals of node.js",
   "main": "app.js",
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/styles": "^4.11.3",
     "body-parser": "^1.19.0",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
