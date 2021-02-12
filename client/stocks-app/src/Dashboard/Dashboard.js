@@ -15,6 +15,8 @@ import Grid from '@material-ui/core/Grid';
 import SearchIcon from '@material-ui/icons/Search';
 import Container from "@material-ui/core/Container";
 
+import Search from "./Search";
+import Watchlist from "./Watchlist";
 import darkTheme from '../theme';
 
 
@@ -22,14 +24,15 @@ import darkTheme from '../theme';
 const useStyles = makeStyles((theme) => (
 {
     root:
-    {
+    {   
+        backgroundColor: "#121212",
         display: "flex"
     },
     margin: 
     {
         margin: theme.spacing(1),
     },
-    appBarSpacer: theme.mixins.toolbar,
+    //appBarSpacer: theme.mixins.toolbar,
     content: 
     {
         flexGrow: 1,
@@ -83,39 +86,11 @@ export default function Dashboard() {
                     className={classes.container}>
                     {/* Chart */}
                     <Grid item xs={12} md={8} lg={9}>
-                        <Paper elevation={3} fullWidth>
-                        <TextField
-                            className={classes.margin}
-                            id="input-with-icon-textfield"
-                            label="TextField"
-                            color="inherit"
-                            maxWidth="50%"
-                            InputProps=
-                            {
-                                {
-                                startAdornment: (<InputAdornment position="start"> <SearchIcon /> </InputAdornment>),
-                                }
-                            }
-                        />
-                        </Paper>
+                        <Search/>
                     </Grid>
 
                     <Grid item xs={12} md={8} lg={9}>
-                        <Paper elevation={3} fullWidth>
-                        <TextField
-                            className={classes.margin}
-                            id="input-with-icon-textfield"
-                            label="TextField"
-                            color="inherit"
-                            maxWidth="50%"
-                            InputProps=
-                            {
-                                {
-                                startAdornment: (<InputAdornment position="start"> <SearchIcon /> </InputAdornment>),
-                                }
-                            }
-                        />
-                        </Paper>
+                        <Watchlist/>
                     </Grid>
                 </Grid>
 
