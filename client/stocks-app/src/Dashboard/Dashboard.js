@@ -7,18 +7,14 @@ import React, { Component, useState } from 'react';
 import { Paper} from '@material-ui/core';
 import { makeStyles} from '@material-ui/core/styles';
 import { useTheme, createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/core/styles';
-import { CssBaseline} from "@material-ui/core";
-import InputAdornment from '@material-ui/core/InputAdornment';
-import TextField from '@material-ui/core/TextField';
+import { ThemeProvider } from "@material-ui/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from '@material-ui/core/Grid';
-import SearchIcon from '@material-ui/icons/Search';
-import Container from "@material-ui/core/Container";
+
 
 import Search from "./Search";
 import Watchlist from "./Watchlist";
 import darkTheme from '../theme';
-
 
 
 const useStyles = makeStyles((theme) => (

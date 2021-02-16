@@ -6,7 +6,6 @@ import Dashboard from "./Dashboard/Dashboard";
 import logo from './logo.svg';
 import './App.css';
 
-
 export default function App() {
     return <Dashboard />;
 }
