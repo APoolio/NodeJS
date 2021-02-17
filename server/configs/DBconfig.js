@@ -1,10 +1,10 @@
 var Pool = require('pg').Pool;
 var pool = new Pool({
-  user: 'andrew',
-  host: 'localhost',
-  database: 'StocksDB',
-  password: 'db_pass',
-  port: 5432,
+  user: process.env.db_user,
+  host: process.env.db_host,
+  database: process.env.database,
+  password: process.env.db_password,
+  port: process.env.eb_port,
 });
 
 var getStocks = function(request, response){

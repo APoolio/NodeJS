@@ -4,6 +4,8 @@ const routes = require('express').Router();
 var stocks = require('./stocks/stocks');
 var db = require('../configs/DBconfig');
 
+require('dotenv').config();
+
 //http://127.0.0.1:3000/
 routes.get('/', function(req, res){
   //db.getStocks();

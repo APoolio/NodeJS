@@ -8,14 +8,13 @@ var router = express.Router();
 //http://127.0.0.1:3000/stock/{tick}
 router.get('/:tick', function(req, res) {
 
-  console.log("in /tick");
   var options = {
     method: 'GET',
     url: 'https://yahoo-finance-low-latency.p.rapidapi.com/v8/finance/chart/' + req.params.tick,
     qs: {comparisons: 'MSFT,^VIX', events: 'div,split'},
     headers: {
-      'x-rapidapi-key': '9255378ff9msh5b72516af51d05dp160034jsn21cf53f6433c',
-      'x-rapidapi-host': 'yahoo-finance-low-latency.p.rapidapi.com',
+      'x-rapidapi-key': process.env.x-rapidapi-key,
+      'x-rapidapi-host': process.env.x-rapidapi-host,
       useQueryString: true
     }
   };
@@ -25,9 +24,7 @@ router.get('/:tick', function(req, res) {
         if (error) throw new Error(error);
         response.setEncoding('utf-8');
         var data = JSON.parse(body);
-        console.log("in /tick");
         res.send(data);
-        
         //var metadata = JSON.parse(data.chart.meta);
         //console.log(data.chart.result[0].meta.symbol);
         //console.log(data.chart.result[0].meta.regularMarketPrice);

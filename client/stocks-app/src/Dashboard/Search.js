@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(1),
       flex: 1,
       color: "#fff",
-      width: '100%'
     },
     iconButton: {
       padding: 10,
@@ -33,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-const handleSubmitT = (event) => 
+const handleSubmit = (event) => 
 {
   event.preventDefault();
   
@@ -50,7 +49,7 @@ export default function Search() {
   
     return (
         <Paper component="form" elevation={7} className={classes.root}>
-          <form onSubmit={handleSubmitT} style={{width: '100%'}}>
+          <form style={{width: '100%', display: 'flex'}}>
               <InputBase
                 className={classes.input}
                 placeholder="Add a Stock"
@@ -58,11 +57,10 @@ export default function Search() {
                 fullWidth={true}
                 width='100%'
                 //onChange={handleChange}
-                inputProps={{ 'aria-label': 'search google maps', width: '100%' }}>  
-          <IconButton type="submit" className={classes.iconButton} aria-label="search">
+                inputProps={{ 'aria-label': 'search google maps', width: '100%' }}/>  
+          <IconButton type="submit" className={classes.iconButton} aria-label="search" onClick={handleSubmit}>
             <SearchIcon />
           </IconButton>
-          </InputBase>
           </form>
         </Paper>
       );
