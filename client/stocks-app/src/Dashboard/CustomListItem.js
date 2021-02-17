@@ -14,6 +14,7 @@ import { useTheme } from '@material-ui/core/styles';
 import darkTheme from '../theme';
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
+import Paper from '@material-ui/core/Paper';
 
 
 //Icons

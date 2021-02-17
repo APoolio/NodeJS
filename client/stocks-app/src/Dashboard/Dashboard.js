@@ -80,11 +80,12 @@ export default function Dashboard() {
                     alignItems="center"
                     justify="center"
                     className={classes.container}>
-                    {/* Chart */}
+                    {/* Search Bar */}
                     <Grid item xs={12} md={8} lg={9}>
                         <Search/>
                     </Grid>
 
+                    {/* Watchlist */}
                     <Grid item xs={12} md={8} lg={9}>
                         <Watchlist/>
                     </Grid>
