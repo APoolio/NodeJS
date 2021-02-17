@@ -1,1 +1,3 @@
-# NodeJS
+# StockAnalysis
+
+### Creating a stock analysis dashboard using NodeJS, React, Redux, and Materia-UI to help watch debt accumulate (lol)...
