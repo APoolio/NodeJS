@@ -8,6 +8,7 @@ var router = express.Router();
 //http://127.0.0.1:3000/stock/{tick}
 router.get('/:tick', function(req, res) {
 
+  console.log("in /tick");
   var options = {
     method: 'GET',
     url: 'https://yahoo-finance-low-latency.p.rapidapi.com/v8/finance/chart/' + req.params.tick,
@@ -24,7 +25,9 @@ router.get('/:tick', function(req, res) {
         if (error) throw new Error(error);
         response.setEncoding('utf-8');
         var data = JSON.parse(body);
+        console.log("in /tick");
         res.send(data);
+        
         //var metadata = JSON.parse(data.chart.meta);
         //console.log(data.chart.result[0].meta.symbol);
         //console.log(data.chart.result[0].meta.regularMarketPrice);
