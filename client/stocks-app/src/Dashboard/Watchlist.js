@@ -29,7 +29,6 @@ export default function Watchlist()
     return (
         <List className={classes.root}>
             {/* ListItem */}
-            {/* <CustomListItem/> */}
             {renderedCustomListItems}
             <Divider variant="inset" component="li" />
         </List>

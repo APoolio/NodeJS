@@ -62,14 +62,25 @@ const selectStockBySymbol = (state, stockId) => {
     return state.stocks.find((stock) => stock.id === stockId)
 }
 
+
+
 export default function CustomListItem({stock})
 {
     
     const classes = useStyles();
     //const stock = useSelector((state) => selectStockBySymbol(state, id))
-    const {id, currentPrice, previousPrice } = stock
+    const {id, currentPrice, previousClose } = stock
     const dispatch = useDispatch()
 
+    console.log(previousClose)
+
+    function calculatePercentChange(currentPrice, previousClose){
+        return '(' + (100 * ((parseFloat(currentPrice) - parseFloat(previousClose)) / parseFloat(previousClose))).toFixed(2) + '%)';
+    }
+
+    function calculateDifference(currentPrice, previousClose){
+        return (currentPrice - previousClose).toFixed(2);
+    }
 
     const handleDelete = (event) => {
         dispatch({type: 'stocks/deleteStock', payload: stock.id })
@@ -89,9 +100,9 @@ export default function CustomListItem({stock})
 
                             <Grid alignContent="flex-end">
                                 <Grid item className={classes.secondaryListItemText}>
-                                    <Typography variant="subtitle1">
+                                    {/* <Typography variant="subtitle1">
                                         {id}
-                                    </Typography>
+                                    </Typography> */}
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -119,7 +130,7 @@ export default function CustomListItem({stock})
                                 <Grid container direction="row" alignItems="center">
                                     <Grid item>
                                         <Typography variant="overline" className={classes.stockTrendText}>
-                                            -1.96 (1.45%) 
+                                            {calculateDifference(currentPrice, previousClose)} {calculatePercentChange(currentPrice, previousClose)} 
                                         </Typography>
                                     </Grid>
 
@@ -141,24 +152,3 @@ export default function CustomListItem({stock})
     );
 
 }
-
-{/* <ListItem>
-            <Box className={classes.primaryListItemText} textAlign="right">
-                AAPL
-            </Box>
-            <ListItemText classes={{secondary:classes.secondaryListItemText}}
-                secondaryTypographyProps={{ align: "left" }}
-                secondary="Apple Inc."
-            />
-            <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
-                <DeleteIcon />
-                </IconButton>
-            </ListItemSecondaryAction>
-
-            <Box>
-                <ListItemText>
-                    primary="tetst tsetst"
-                </ListItemText>
-            </Box>
-            </ListItem> */}
