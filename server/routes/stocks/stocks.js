@@ -1,5 +1,4 @@
 //Routing file for the stocks API methods
-
 var bodyParser = require('body-parser');
 var request = require('request');
 var express = require('express');

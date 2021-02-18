@@ -1,5 +1,8 @@
-/*jshint esversion: 6 */ 
+import { createEntityAdapter } from '@reduxjs/toolkit'
+
 const initialState = [];
+const stocksAdapter = createEntityAdapter()
+
 
 export default function stocksReducer(state = initialState, action) 
 {
@@ -12,12 +15,17 @@ export default function stocksReducer(state = initialState, action)
             return [
                 ...state,
                 {
-                    id: 1,
-                    text: action.payload
+                    id: action.symbol,
+                    currentPrice: action.currentPrice,
+                    previousClose: action.previousClose,
                 }
             ]
         }
+        case 'stocks/deleteStock':
+        {
+            return stocksAdapter.removeOne(action.stock);
+        }
         default:
-            return state
+            return state;
     }
 }

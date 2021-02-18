@@ -1,20 +1,12 @@
-/*jshint esversion: 6 */ 
-
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-
+import { useDispatch, useSelector } from 'react-redux';
 //Material UI
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-
-import { Box, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
-import { useTheme } from '@material-ui/core/styles';
-import darkTheme from '../theme';
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
-import Paper from '@material-ui/core/Paper';
 
 
 //Icons
@@ -66,9 +58,22 @@ const useStyles = makeStyles((darkTheme) => ({
     
   }));
 
-export default function CustomListItem() 
+const selectStockBySymbol = (state, stockId) => {
+    return state.stocks.find((stock) => stock.id === stockId)
+}
+
+export default function CustomListItem({stock})
 {
+    
     const classes = useStyles();
+    //const stock = useSelector((state) => selectStockBySymbol(state, id))
+    const {id, currentPrice, previousPrice } = stock
+    const dispatch = useDispatch()
+
+
+    const handleDelete = (event) => {
+        dispatch({type: 'stocks/deleteStock', payload: stock.id })
+    }
 
     return (
             <ListItem>
@@ -78,14 +83,14 @@ export default function CustomListItem()
                         <Grid container direction="row" wrap="nowrap">
                             <Grid item xs={3} className={classes.primaryListItemText}>
                                 <Typography variant="h2">
-                                    AAPL
+                                    {id}
                                 </Typography>
                             </Grid>
 
                             <Grid alignContent="flex-end">
                                 <Grid item className={classes.secondaryListItemText}>
                                     <Typography variant="subtitle1">
-                                        Apple Inc.
+                                        {id}
                                     </Typography>
                                 </Grid>
                             </Grid>
@@ -95,7 +100,7 @@ export default function CustomListItem()
                     <Grid item xs={1}>
                         <Grid container justify="center">
                             <Grid item>
-                                <IconButton edge="end" aria-label="delete">
+                                <IconButton edge="end" aria-label="delete" onClick={handleDelete}>
                                     <DeleteIcon/>
                                 </IconButton>
                             </Grid>
@@ -107,7 +112,7 @@ export default function CustomListItem()
                         <Grid container spacing={1} direction="row">
                             <Grid item xs={2}>
                                 <Typography variant="overline" className={classes.stockPriceText}>
-                                    133.44 USD
+                                    {currentPrice} USD
                                 </Typography>
                             </Grid>
                             <Grid item xs={4}>

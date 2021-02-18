@@ -1,13 +1,12 @@
-/*jshint esversion: 6 */ 
-
 import React from 'react';
+import { useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
-
-
 import CustomListItem from './CustomListItem';
 
+
+const selectStocks = (state) => state.stocks;
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,12 +19,18 @@ const useStyles = makeStyles((theme) => ({
 export default function Watchlist() 
 {
     const classes = useStyles();
+    const stocks = useSelector(selectStocks);
+
+    //Creating an array of stocks
+    const renderedCustomListItems = stocks.map((stock) => {
+      return <CustomListItem key={stock.id} stock={stock} />
+    });
 
     return (
         <List className={classes.root}>
             {/* ListItem */}
-            <CustomListItem/>
-            
+            {/* <CustomListItem/> */}
+            {renderedCustomListItems}
             <Divider variant="inset" component="li" />
         </List>
     );

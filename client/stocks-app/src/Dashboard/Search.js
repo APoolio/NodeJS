@@ -1,5 +1,3 @@
-/*jshint esversion: 6 */ 
-
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
@@ -38,15 +36,27 @@ export default function Search() {
     const [stock, setStock] = useState('');
     const dispatch = useDispatch();
 
+    const handleChange = (e) => setStock(e.target.value);
+
     const handleSubmit = (event) => 
     {
       event.preventDefault();
     
-      console.log("HANDLESUBMIT");
-      searchStock("TSLA").then(response => 
+      console.log("HANDLE_SUBMIT");
+      searchStock(stock).then(response => 
         {
-          console.log("TEST: " + response);
-          dispatch({type: 'stocks/addStock', payload: response});
+          var data_string = JSON.stringify(response);
+          var data = JSON.parse(data_string);
+          //var metadata = JSON.parse(data.chart.meta);
+          //console.log(data.chart.result[0].meta.symbol);
+          setStock('');
+          dispatch( 
+          {
+            type: 'stocks/addStock', 
+            symbol: data.chart.result[0].meta.symbol,
+            currentPrice: data.chart.result[0].meta.regularMarketPrice,
+            previousClose: data.chart.result[0].meta.previousClose,
+          });
         });
     };
 
@@ -59,7 +69,8 @@ export default function Search() {
                 autoFocus={true}
                 fullWidth={true}
                 width='100%'
-                //onChange={handleChange}
+                onChange={handleChange}
+                value={stock}
                 inputProps={{ 'aria-label': 'search google maps', width: '100%' }}/>  
           <IconButton type="submit" className={classes.iconButton} aria-label="search" onClick={handleSubmit}>
             <SearchIcon />
