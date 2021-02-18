@@ -1,14 +1,12 @@
 /*jshint esversion: 6 */ 
 
-import React from 'react';
+import React, {useState} from 'react';
+import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
-import FormControl from '@material-ui/core/FormControl';
-
-
 import { searchStock } from '../services/stockServices';
 
 const useStyles = makeStyles((theme) => ({
@@ -32,21 +30,26 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-const handleSubmit = (event) => 
-{
-  event.preventDefault();
-  
-  console.log("HANDLESUBMIT");
-  searchStock("TSLA").then(response => 
-    {
-      console.log("TEST: " + response);
-    });
-};
+
 
 export default function Search() {
     //const theme = useTheme();
     const classes = useStyles();
-  
+    const [stock, setStock] = useState('');
+    const dispatch = useDispatch();
+
+    const handleSubmit = (event) => 
+    {
+      event.preventDefault();
+    
+      console.log("HANDLESUBMIT");
+      searchStock("TSLA").then(response => 
+        {
+          console.log("TEST: " + response);
+          dispatch({type: 'stocks/addStock', payload: response});
+        });
+    };
+
     return (
         <Paper component="form" elevation={7} className={classes.root}>
           <form style={{width: '100%', display: 'flex'}}>

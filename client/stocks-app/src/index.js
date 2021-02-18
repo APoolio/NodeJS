@@ -4,13 +4,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import reportWebVitals from './tests/reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 
-require('dotenv').config();
 
-console.log(process.env);
 
 ReactDOM.render(
     <Provider store={store}>

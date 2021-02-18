@@ -13,8 +13,8 @@ router.get('/:tick', function(req, res) {
     url: 'https://yahoo-finance-low-latency.p.rapidapi.com/v8/finance/chart/' + req.params.tick,
     qs: {comparisons: 'MSFT,^VIX', events: 'div,split'},
     headers: {
-      'x-rapidapi-key': process.env.x-rapidapi-key,
-      'x-rapidapi-host': process.env.x-rapidapi-host,
+      'x-rapidapi-key': process.env.key,
+      'x-rapidapi-host': process.env.host,
       useQueryString: true
     }
   };
