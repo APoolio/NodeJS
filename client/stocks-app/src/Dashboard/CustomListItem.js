@@ -7,6 +7,7 @@ import { Typography } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
+import Chart from './Chart';
 
 
 //Icons
@@ -58,21 +59,12 @@ const useStyles = makeStyles((darkTheme) => ({
     
   }));
 
-const selectStockBySymbol = (state, stockId) => {
-    return state.stocks.find((stock) => stock.id === stockId)
-}
-
-
-
 export default function CustomListItem({stock})
 {
-    
-    const classes = useStyles();
-    //const stock = useSelector((state) => selectStockBySymbol(state, id))
-    const {id, currentPrice, previousClose } = stock
-    const dispatch = useDispatch()
 
-    console.log(previousClose)
+    const classes = useStyles();
+    const {id, data, currentPrice, previousClose } = stock
+    const dispatch = useDispatch()
 
     function calculatePercentChange(currentPrice, previousClose){
         return '(' + (100 * ((parseFloat(currentPrice) - parseFloat(previousClose)) / parseFloat(previousClose))).toFixed(2) + '%)';
@@ -90,46 +82,49 @@ export default function CustomListItem({stock})
             <ListItem>
                 <Grid container direction="column">
                     <Grid container spacing={1} direction="row">
-                    <Grid item xs={11} >
-                        <Grid container direction="row" wrap="nowrap">
-                            <Grid item xs={3} className={classes.primaryListItemText}>
-                                <Typography variant="h2">
-                                    {id}
-                                </Typography>
-                            </Grid>
 
-                            <Grid alignContent="flex-end">
-                                <Grid item className={classes.secondaryListItemText}>
-                                    {/* <Typography variant="subtitle1">
+                        {/* STOCK TICK AND FULL NAME  */}
+                        <Grid item xs={11} >
+                            <Grid container direction="row" wrap="nowrap">
+                                <Grid item xs={3} className={classes.primaryListItemText}>
+                                    <Typography variant="h2">
                                         {id}
-                                    </Typography> */}
+                                    </Typography>
+                                </Grid>
+
+                                <Grid alignContent="flex-end">
+                                    <Grid item className={classes.secondaryListItemText}>
+                                        <Typography variant="subtitle1">
+                                            {data.chart.result[0].meta.symbol}
+                                        </Typography>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    
+                        <Grid item xs={1}>
+                            <Grid container justify="center">
+                                <Grid item>
+                                    <IconButton edge="end" aria-label="delete" onClick={handleDelete}>
+                                        <DeleteIcon/>
+                                    </IconButton>
                                 </Grid>
                             </Grid>
                         </Grid>
                     </Grid>
-                    
-                    <Grid item xs={1}>
-                        <Grid container justify="center">
-                            <Grid item>
-                                <IconButton edge="end" aria-label="delete" onClick={handleDelete}>
-                                    <DeleteIcon/>
-                                </IconButton>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    </Grid>
 
+                    {/* STOCK PRICE AND CHANGE  */}
                     <Grid item>
                         <Grid container spacing={1} direction="row">
                             <Grid item xs={2}>
                                 <Typography variant="overline" className={classes.stockPriceText}>
-                                    {currentPrice} USD
+                                    {(data.chart.result[0].meta.regularMarketPrice).toFixed(2)} USD
                                 </Typography>
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={3}>
                                 <Grid container direction="row" alignItems="center">
                                     <Grid item>
-                                        <Typography variant="overline" className={classes.stockTrendText}>
+                                        <Typography variant="overline"  className={classes.stockTrendText}>
                                             {calculateDifference(currentPrice, previousClose)} {calculatePercentChange(currentPrice, previousClose)} 
                                         </Typography>
                                     </Grid>
@@ -145,7 +140,8 @@ export default function CustomListItem({stock})
                     </Grid>
 
                     <Grid item>
-                        ADVANCED STOCK INFO
+                        {console.log(stock.id)}
+                        <Chart key={stock.id} stock={stock}/>
                     </Grid>
                 </Grid>
             </ListItem>

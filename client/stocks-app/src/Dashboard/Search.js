@@ -54,6 +54,7 @@ export default function Search() {
           {
             type: 'stocks/addStock', 
             symbol: data.chart.result[0].meta.symbol,
+            data: data,
             currentPrice: data.chart.result[0].meta.regularMarketPrice,
             previousClose: data.chart.result[0].meta.previousClose,
           });

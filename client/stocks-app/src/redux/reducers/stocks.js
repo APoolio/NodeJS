@@ -16,6 +16,7 @@ export default function stocksReducer(state = initialState, action)
                 ...state,
                 {
                     id: action.symbol,
+                    data: action.data,
                     currentPrice: action.currentPrice,
                     previousClose: action.previousClose,
                 }

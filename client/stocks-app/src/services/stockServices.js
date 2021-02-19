@@ -7,7 +7,7 @@ export async function getAllStocks() {
 }
 
 export async function searchStock(data) {
-    const response = await fetch('/stock/TSLA', {
+    const response = await fetch(`/stock/${data}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',

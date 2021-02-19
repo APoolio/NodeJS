@@ -10,7 +10,7 @@ router.get('/:tick', function(req, res) {
   var options = {
     method: 'GET',
     url: 'https://yahoo-finance-low-latency.p.rapidapi.com/v8/finance/chart/' + req.params.tick,
-    qs: {comparisons: 'MSFT,^VIX', events: 'div,split'},
+    qs: {range: '1d'},
     headers: {
       'x-rapidapi-key': process.env.key,
       'x-rapidapi-host': process.env.host,

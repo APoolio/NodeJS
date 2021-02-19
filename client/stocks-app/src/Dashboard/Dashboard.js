@@ -1,21 +1,18 @@
-/*jshint esversion: 6 */ 
-
 // React
-import React, { Component, useState } from 'react';
+import React from 'react';
 
 // MaterialUI 
 import { Paper} from '@material-ui/core';
 import { makeStyles} from '@material-ui/core/styles';
-import { useTheme, createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from '@material-ui/core/Grid';
-
 
 import Search from "./Search";
 import Watchlist from "./Watchlist";
 import darkTheme from '../theme';
 
+import { getCurrentDate } from '../utils/date';
 
 const useStyles = makeStyles((theme) => (
 {
@@ -43,33 +40,19 @@ const useStyles = makeStyles((theme) => (
 
 }));
 
-async function callApi()
+export default function Dashboard() 
 {
-    const response = await fetch('/user/stocks/1');
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-    
-    return body;
-}
-
-function componentDidMount() 
-{
-  this.callApi()
-    .then(res => this.setState({ response: res.express }))
-    .catch(err => console.log(err));
-}
-
-export default function Dashboard() {
-{
-
     var classes = useStyles();
-
+    
     return (
     <ThemeProvider theme={darkTheme}>
         <CssBaseline />
+
+        {/* TODO: Change header to utilize Material-UI and implement getCurrentDate() from utils folder */}
+
         <header className="App-header">
           <p className="Header-text-title">Your Stocks</p>
-          <p className="Header-text-date">February 10, 2021</p>
+          <p className="Header-text-date">February 18, 2021</p>
         </header>
 
         <div className={classes.root}>
@@ -99,10 +82,6 @@ export default function Dashboard() {
           </div>
     </ThemeProvider>
     );
-  }
 }
 
-{/* <form action="./stocks" method="GET">
-    <input id="ticker" type="text" name="stock" placeholder="Add a stock to the watchlist"/>
-    <button id="button" type="submit">Add Stonk</button>
-</form> */}
+
