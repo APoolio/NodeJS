@@ -43,6 +43,11 @@ export default function Chart({stock})
 
     console.log(dataChart[10]);
 
+    const formatXAxis = (tick) => {
+      var date = new Date(tick * 1000)
+      return moment(date).format('HH:mm')
+    }
+
   return (
      <LineChart width={600} height={300} data={dataChart}>
         <Line 
@@ -50,13 +55,13 @@ export default function Chart({stock})
           data = {dataChart}
           dot={false}
           type="monotone" 
-          stroke="rgba(255, 255, 255, 0.7)" />
+          stroke="rgba(255, 0, 0, 0.7)" />
         <XAxis 
           dataKey='timeStamp'
           domain={['auto', 'auto']}
-          tickFormatter={(unixTime) => moment(unixTime).format('HH:mm')}
+          interval={12}
+          tickFormatter={formatXAxis}
           scale="time"
-          tickCount={0}
           type='number' 
           stroke="rgba(255, 255, 255, 0.7)"/>
         <YAxis
