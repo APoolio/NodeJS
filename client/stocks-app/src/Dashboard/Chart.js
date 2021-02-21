@@ -7,7 +7,6 @@ import Paper from '@material-ui/core/Paper';
 import moment from 'moment'
 import Grid from '@material-ui/core/Grid';
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "rgba(255, 255, 255, 0.08)",
@@ -26,6 +25,10 @@ export default function Chart({stock})
 
     var dataChart = []
     var pos = 0;
+
+    function calculatePercentChange(currentPrice, previousClose){
+      return (100 * ((parseFloat(currentPrice) - parseFloat(previousClose)) / parseFloat(previousClose))).toFixed(2);
+  }
 
     function createChartPoints(data)
     {
@@ -89,7 +92,7 @@ export default function Chart({stock})
           data = {dataChart}
           dot={false}
           type="monotone" 
-          stroke="rgba(255, 0, 0, 0.7)" />
+          stroke={calculatePercentChange(data.chart.result[0].meta.regularMarketPrice,data.chart.result[0].meta.previousClose) > 0 ? "#64DD17" : "rgba(255, 0, 0, 0.7)"} />
         <XAxis 
           dataKey='timeStamp'
           domain={['auto', 'auto']}

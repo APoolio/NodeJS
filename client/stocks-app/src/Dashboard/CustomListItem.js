@@ -13,7 +13,7 @@ import Divider from '@material-ui/core/Divider';
 //Icons
 import DeleteIcon from "@material-ui/icons/Delete";
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 
 
 const useStyles = makeStyles((darkTheme) => ({
@@ -57,6 +57,11 @@ const useStyles = makeStyles((darkTheme) => ({
         textShadow: "0 0 16px red"
     },
 
+    stockTrendUp:{
+        fontSize: 15,
+        color: "#64DD17",
+    },
+
     Divider:{
         background: "rgba(255, 255, 255, 0.12)",
         height: "20px"
@@ -72,7 +77,7 @@ export default function CustomListItem({stock})
     const dispatch = useDispatch()
 
     function calculatePercentChange(currentPrice, previousClose){
-        return '(' + (100 * ((parseFloat(currentPrice) - parseFloat(previousClose)) / parseFloat(previousClose))).toFixed(2) + '%)';
+        return (100 * ((parseFloat(currentPrice) - parseFloat(previousClose)) / parseFloat(previousClose))).toFixed(2);
     }
 
     function calculateDifference(currentPrice, previousClose){
@@ -82,6 +87,8 @@ export default function CustomListItem({stock})
     const handleDelete = (event) => {
         dispatch({type: 'stocks/deleteStock', payload: stock.id })
     }
+
+    const percentChange = calculatePercentChange(currentPrice, previousClose);
 
     return (
         <div>
@@ -130,14 +137,17 @@ export default function CustomListItem({stock})
                             <Grid item xs={3}>
                                 <Grid container direction="row" alignItems="center">
                                     <Grid item>
-                                        <Typography variant="overline"  className={classes.stockTrendText}>
-                                            {calculateDifference(currentPrice, previousClose)} {calculatePercentChange(currentPrice, previousClose)} 
+                                        <Typography variant="overline"  className={(parseFloat(percentChange) > 0) ? classes.stockTrendUp : classes.stockTrendText}>
+                                            {calculateDifference(currentPrice, previousClose)} ({percentChange}%) 
                                         </Typography>
                                     </Grid>
 
                                     <Grid item>
                                         <Icon fontSize="small">
-                                            <ArrowDownwardIcon style={{position: 'relative', top:'3px', color: "#d50000"}} />
+                                            {parseFloat(percentChange) > 0 ? 
+                                            <ArrowUpwardIcon style={{position: 'relative', top:'3px', color: "#64DD17"}} />
+                                            :
+                                            <ArrowDownwardIcon style={{position: 'relative', top:'3px', color: "#d50000"}}/> }
                                         </Icon>
                                     </Grid>
                                 </Grid>

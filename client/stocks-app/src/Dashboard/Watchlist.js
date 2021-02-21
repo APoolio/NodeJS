@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import CustomListItem from './CustomListItem';
-
+import Paper from '@material-ui/core/Paper';
 
 const selectStocks = (state) => state.stocks;
 
@@ -15,6 +15,10 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: "5px",
       margin: '10px 0'
     },
+
+    Paper: {
+      borderRadius: "10px"
+    }
   }));
 
 export default function Watchlist() 
@@ -28,10 +32,12 @@ export default function Watchlist()
     });
 
     return (
+      <Paper component="form" elevation={7} className={classes.Paper}>
         <List className={classes.root}>
             {/* ListItem */}
             {renderedCustomListItems}
             
         </List>
+      </Paper>
     );
 }
