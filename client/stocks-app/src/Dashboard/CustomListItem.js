@@ -8,7 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
 import Chart from './Chart';
-
+import Divider from '@material-ui/core/Divider';
 
 //Icons
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -53,9 +53,14 @@ const useStyles = makeStyles((darkTheme) => ({
 
     stockTrendText:{
         fontSize: 15,
-        color: "#d50000"
-    }
+        color: "#d50000",
+        textShadow: "0 0 16px red"
+    },
 
+    Divider:{
+        background: "rgba(255, 255, 255, 0.12)",
+        height: "20px"
+    }
     
   }));
 
@@ -79,6 +84,7 @@ export default function CustomListItem({stock})
     }
 
     return (
+        <div>
             <ListItem>
                 <Grid container direction="column">
                     <Grid container spacing={1} direction="row">
@@ -145,6 +151,8 @@ export default function CustomListItem({stock})
                     </Grid>
                 </Grid>
             </ListItem>
+            <Divider variant="middle" component="li" />
+            </div>
     );
 
 }

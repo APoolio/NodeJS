@@ -1,17 +1,23 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useTheme } from '@material-ui/core/styles';
+import { useTheme, makeStyles } from '@material-ui/core/styles';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer, CartesianGrid, Tooltip } from 'recharts';
 import { Typography } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import moment from 'moment'
+import Grid from '@material-ui/core/Grid';
 
 
-
+const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundColor: "rgba(255, 255, 255, 0.08)",
+  },
+}));
 
 
 export default function Chart({stock}) 
 {
+    const classes = useStyles()
     const theme = useTheme();
     const dispatch = useDispatch()
     const {id, data, currentPrice, previousClose } = stock
@@ -41,12 +47,40 @@ export default function Chart({stock})
 
     createChartPoints(data);
 
-    console.log(dataChart[10]);
-
     const formatXAxis = (tick) => {
       var date = new Date(tick * 1000)
-      return moment(date).format('HH:mm')
+      return moment(date).format('LT')
     }
+
+    const CustomToolTip = ({ active, payload, label }) => {
+      if(active && payload && payload.length) 
+      {
+        console.log(payload[0].payload.timeStamp)
+        return(
+        <Grid 
+          className={classes.root}
+          container 
+          spacing={2} 
+          direction="row"
+          alignItems="center"
+          wrap="nowrap"> 
+          
+          <Grid item xs={5} >
+            <Typography style={{marginLeft: '15px', color: "rgba(255, 255, 255, 0.7)"}}>
+              ${parseFloat(payload[0].payload.value).toFixed(2)} 
+            </Typography>
+          </Grid>
+          <Grid item xs={7}>
+            <Typography style={{marginLeft: '10px', color: "rgba(255, 255, 255, 0.5)"}}>
+              {formatXAxis(payload[0].payload.timeStamp)}
+            </Typography>
+          </Grid>
+        </Grid>);
+      }
+
+      return null;
+    }
+
 
   return (
      <LineChart width={600} height={300} data={dataChart}>
@@ -70,7 +104,9 @@ export default function Chart({stock})
           type='number' 
           domain={['auto', 'auto']}
           stroke="rgba(255, 255, 255, 0.7)"/>
-          <Tooltip />
+          <Tooltip 
+          //stroke="rgba(255,255,255, 0.0)"
+          content={<CustomToolTip />}/>
     </LineChart>
   );
 }

@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
       width: '700px',
       backgroundColor: "#272c34",
       borderRadius: "5px",
+      margin: '10px 0'
     },
   }));
 
@@ -30,7 +31,7 @@ export default function Watchlist()
         <List className={classes.root}>
             {/* ListItem */}
             {renderedCustomListItems}
-            <Divider variant="inset" component="li" />
+            
         </List>
     );
 }
