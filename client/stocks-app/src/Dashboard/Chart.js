@@ -92,7 +92,7 @@ export default function Chart({stock})
           data = {dataChart}
           dot={false}
           type="monotone" 
-          stroke={calculatePercentChange(data.chart.result[0].meta.regularMarketPrice,data.chart.result[0].meta.previousClose) > 0 ? "#64DD17" : "rgba(255, 0, 0, 0.7)"} />
+          stroke={calculatePercentChange(data.chart.result[0].meta.regularMarketPrice,data.chart.result[0].meta.previousClose) > 0 ? "rgb(23,196,182)" : "rgb(199,19,22)"} />
         <XAxis 
           dataKey='timeStamp'
           domain={['auto', 'auto']}

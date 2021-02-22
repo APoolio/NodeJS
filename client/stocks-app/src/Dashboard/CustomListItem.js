@@ -53,13 +53,12 @@ const useStyles = makeStyles((darkTheme) => ({
 
     stockTrendText:{
         fontSize: 15,
-        color: "#d50000",
-        textShadow: "0 0 16px red"
+        color: "rgb(199,19,22);",
     },
 
     stockTrendUp:{
         fontSize: 15,
-        color: "#64DD17",
+        color: "rgb(23,196,182)",
     },
 
     Divider:{
@@ -145,9 +144,9 @@ export default function CustomListItem({stock})
                                     <Grid item>
                                         <Icon fontSize="small">
                                             {parseFloat(percentChange) > 0 ? 
-                                            <ArrowUpwardIcon style={{position: 'relative', top:'3px', color: "#64DD17"}} />
+                                            <ArrowUpwardIcon style={{position: 'relative', top:'3px', color: "rgb(23,196,182)"}} />
                                             :
-                                            <ArrowDownwardIcon style={{position: 'relative', top:'3px', color: "#d50000"}}/> }
+                                            <ArrowDownwardIcon style={{position: 'relative', top:'3px', color: "rgb(199,19,22)"}}/> }
                                         </Icon>
                                     </Grid>
                                 </Grid>

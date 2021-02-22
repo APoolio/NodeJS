@@ -10,7 +10,7 @@ const selectStocks = (state) => state.stocks;
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      width: '700px',
+      width: '1000px',
       backgroundColor: "#272c34",
       borderRadius: "5px",
       margin: '10px 0'
