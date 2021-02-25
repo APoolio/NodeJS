@@ -40,19 +40,12 @@ export default function Watchlist()
       })
     };
 
-    /* const renderListFromDB = () =>
-    {
-      getAllStocks().then(response => {
-        console.log(response);
-      })
-    }; */
-
     return (
       <Paper component="form" elevation={7} className={classes.Paper}>
         <List className={classes.root}>
             {/* ListItem */}
-            {/* {renderedCustomListItems} */}
-            {renderListFromDB()}
+            {renderedCustomListItems}
+            {/* {renderListFromDB()} */}
         </List>
       </Paper>
     );
