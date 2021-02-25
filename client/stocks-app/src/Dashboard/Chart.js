@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTheme, makeStyles } from '@material-ui/core/styles';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer, CartesianGrid, Tooltip } from 'recharts';
 import { Typography } from '@material-ui/core';
-import Paper from '@material-ui/core/Paper';
 import moment from 'moment'
 import Grid from '@material-ui/core/Grid';
 
@@ -21,8 +20,6 @@ export default function Chart({stock})
     const dispatch = useDispatch()
     const {id, data, currentPrice, previousClose } = stock
 
-    //console.log(data.chart.result[0].timestamp);
-
     var dataChart = []
     var pos = 0;
 
@@ -37,7 +34,6 @@ export default function Chart({stock})
         //Only record value of stock every 5 minutes
         if((pos % 5) === 0)
         {
-          console.log(element);
           dataChart.push(
             {
               timeStamp: element,
@@ -58,7 +54,6 @@ export default function Chart({stock})
     const CustomToolTip = ({ active, payload, label }) => {
       if(active && payload && payload.length) 
       {
-        console.log(payload[0].payload.timeStamp)
         return(
         <Grid 
           className={classes.root}

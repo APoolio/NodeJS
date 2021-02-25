@@ -6,6 +6,8 @@ import Divider from '@material-ui/core/Divider';
 import CustomListItem from './CustomListItem';
 import Paper from '@material-ui/core/Paper';
 
+import { getAllStocks } from '../services/stockServices';
+
 const selectStocks = (state) => state.stocks;
 
 const useStyles = makeStyles((theme) => ({
@@ -31,12 +33,26 @@ export default function Watchlist()
       return <CustomListItem key={stock.id} stock={stock} />
     });
 
+    function renderListFromDB()
+    {
+      getAllStocks(1).then(response => {
+        console.log(response);
+      })
+    };
+
+    /* const renderListFromDB = () =>
+    {
+      getAllStocks().then(response => {
+        console.log(response);
+      })
+    }; */
+
     return (
       <Paper component="form" elevation={7} className={classes.Paper}>
         <List className={classes.root}>
             {/* ListItem */}
-            {renderedCustomListItems}
-            
+            {/* {renderedCustomListItems} */}
+            {renderListFromDB()}
         </List>
       </Paper>
     );
