@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -6,7 +6,7 @@ import Divider from '@material-ui/core/Divider';
 import CustomListItem from './CustomListItem';
 import Paper from '@material-ui/core/Paper';
 
-import { getAllStocks } from '../services/stockServices';
+import { getAllStocks, searchStock } from '../services/stockServices';
 
 const selectStocks = (state) => state.stocks;
 
@@ -25,26 +25,47 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Watchlist() 
 {
+    const [stockList, setList] = useState([]);
+    useEffect( () => {
+      /* fetch(`/user/stocks/ea6be7e5-851c-4fd1-9d16-89417fb06421`).then(
+        console.log
+      ) */
+      var res = getAllStocks('ea6be7e5-851c-4fd1-9d16-89417fb06421')
+
+      console.log(res);
+    })
+
     const classes = useStyles();
     const stocks = useSelector(selectStocks);
 
     //Creating an array of stocks
-    const renderedCustomListItems = stocks.map((stock) => {
+    const renderedCustomListItems = stockList.map((stock) => {
       return <CustomListItem key={stock.id} stock={stock} />
     });
 
-    function renderListFromDB()
+    /* function renderListFromDB()
     {
-      getAllStocks(1).then(response => {
-        console.log(response);
+      getAllStocks('ea6be7e5-851c-4fd1-9d16-89417fb06421').then(db_response => {
+        //console.log(db_response)
+        db_response[0].ticks.forEach(element => {
+          searchStock(element).then(response => {
+            var stock = response.chart.result[0];
+            stockList.push(stock)
+          })
+        });
+        searchStock(db_response[0].tick).then(response => {
+          console.log(response)
+        }) 
       })
-    };
+    }; */
+
+    //renderListFromDB();
 
     return (
       <Paper component="form" elevation={7} className={classes.Paper}>
         <List className={classes.root}>
             {/* ListItem */}
-            {renderedCustomListItems}
+            {/* {renderedCustomListItems} */}
             {/* {renderListFromDB()} */}
         </List>
       </Paper>

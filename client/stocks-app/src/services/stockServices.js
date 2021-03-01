@@ -1,6 +1,7 @@
 /*jshint esversion: 6 */ 
 
 export async function getAllStocks(id) {
+    console.log(id)
 
     const response = await fetch(`/user/stocks/${id}`);
     return await response.json();
