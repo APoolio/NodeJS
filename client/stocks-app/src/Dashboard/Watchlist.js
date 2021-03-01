@@ -12,10 +12,11 @@ const selectStocks = (state) => state.stocks;
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      width: '1000px',
+      alignItems: "center",
       backgroundColor: "#272c34",
       borderRadius: "5px",
-      margin: '10px 0'
+      margin: '10px 0',
+      display: 'flex'
     },
 
     Paper: {
@@ -27,13 +28,14 @@ export default function Watchlist()
 {
     const [stockList, setList] = useState([]);
     useEffect( () => {
-      /* fetch(`/user/stocks/ea6be7e5-851c-4fd1-9d16-89417fb06421`).then(
-        console.log
-      ) */
-      var res = getAllStocks('ea6be7e5-851c-4fd1-9d16-89417fb06421')
-
-      console.log(res);
-    })
+      getAllStocks('ea6be7e5-851c-4fd1-9d16-89417fb06421').then(response => {
+        response[0].ticks.forEach(e => {
+          searchStock(e).then(res => {
+            setList(res.chart.result[0]);
+          })
+          return;
+        });
+      })});
 
     const classes = useStyles();
     const stocks = useSelector(selectStocks);
@@ -65,7 +67,7 @@ export default function Watchlist()
       <Paper component="form" elevation={7} className={classes.Paper}>
         <List className={classes.root}>
             {/* ListItem */}
-            {/* {renderedCustomListItems} */}
+            {renderedCustomListItems}
             {/* {renderListFromDB()} */}
         </List>
       </Paper>
