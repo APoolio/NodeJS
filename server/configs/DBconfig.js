@@ -14,10 +14,8 @@ var pool = new Pool({
 
 var getStocks = function(request, response)
 {
-
-  console.log('in get stocks');
   var id = request.params.id;
-
+  
   pool.query('SELECT ticks FROM tick_list WHERE id = $1', [id], function(error, results){
     if (error) {
       throw error;

@@ -24,25 +24,28 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-export default function Watchlist() 
+export default function Watchlist()
 {
-    const [stockList, setList] = useState([]);
+    const [list, setList] = useState({ticks: []});
+    var test = 0;
     useEffect( () => {
       getAllStocks('ea6be7e5-851c-4fd1-9d16-89417fb06421').then(response => {
+        //console.log(response)
         response[0].ticks.forEach(e => {
           searchStock(e).then(res => {
+            //console.log(res.chart.result[0])
             setList(res.chart.result[0]);
           })
-          return;
         });
-      })});
+      })}, []);
 
     const classes = useStyles();
     const stocks = useSelector(selectStocks);
 
     //Creating an array of stocks
-    const renderedCustomListItems = stockList.map((stock) => {
-      return <CustomListItem key={stock.id} stock={stock} />
+    const renderedCustomListItems = list.ticks.map((stock) => {
+      console.log(stock)
+      //return <CustomListItem key={stock.id} stock={stock} /> 
     });
 
     /* function renderListFromDB()
