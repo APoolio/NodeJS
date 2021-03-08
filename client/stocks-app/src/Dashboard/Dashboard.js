@@ -7,7 +7,6 @@ import { makeStyles} from '@material-ui/core/styles';
 import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from '@material-ui/core/Grid';
-import { Typography } from "@material-ui/core";
 
 import Search from "./Search";
 import Watchlist from "./Watchlist";
@@ -15,7 +14,6 @@ import Header from "./Header";
 import darkTheme from '../theme';
 import moment from 'moment'
 
-import { getCurrentDate } from '../utils/date';
 
 const useStyles = makeStyles((theme) => (
 {
